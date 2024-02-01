@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 
 
 const UserPanel = () => {
@@ -14,8 +15,19 @@ const UserPanel = () => {
         setInputText(e.target.value);
       };
 
-      const handleSubmit = () => {
-        
+      const handleSubmit = async() => {
+        try {
+           
+            const apiUrl = "http://localhost:8080/item";
+            const data = { inputText,selectedImage };
+            const response = await axios.post(apiUrl, data);
+      
+            // Handle the response as needed
+            console.log("Server Response:", response.data);
+          } catch (error) {
+            // Handle errors
+            console.error("Error:", error);
+          }
         console.log("Submitted:", inputText, selectedImage);
       };
     
