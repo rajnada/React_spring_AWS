@@ -4,7 +4,7 @@ import axios from "axios";
 
 const UserPanel = () => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const [inputText, setInputText] = useState("");
+    const [name, setName] = useState("");
     
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file:any = event.target.files?.[0];
@@ -12,14 +12,14 @@ const UserPanel = () => {
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputText(e.target.value);
+        setName(e.target.value);
       };
 
       const handleSubmit = async() => {
         try {
            
             const apiUrl = "http://localhost:8080/item";
-            const data = { inputText,selectedImage };
+            const data = { name,selectedImage };
             const response = await axios.post(apiUrl, data);
       
             // Handle the response as needed
@@ -28,7 +28,7 @@ const UserPanel = () => {
             // Handle errors
             console.error("Error:", error);
           }
-        console.log("Submitted:", inputText, selectedImage);
+        console.log("Submitted:", name, selectedImage);
       };
     
   return (
@@ -53,7 +53,7 @@ const UserPanel = () => {
     <input
         type="text"
         placeholder="Enter text"
-        value={inputText}
+        value={name}
         onChange={handleInputChange}
         className="mt-4 p-2 border border-gray-300 rounded-md w-full"
       />
