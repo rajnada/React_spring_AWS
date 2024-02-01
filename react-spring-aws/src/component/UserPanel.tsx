@@ -3,12 +3,12 @@ import axios from "axios";
 
 
 const UserPanel = () => {
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [image, setImage] = useState<File | null>(null);
     const [name, setName] = useState("");
     
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file:any = event.target.files?.[0];
-      setSelectedImage(file);
+      setImage(file);
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +19,7 @@ const UserPanel = () => {
         try {
            
             const apiUrl = "http://localhost:8080/item";
-            const data = { name,selectedImage };
+            const data = { name,image };
             const response = await axios.post(apiUrl, data);
       
             // Handle the response as needed
@@ -28,7 +28,7 @@ const UserPanel = () => {
             // Handle errors
             console.error("Error:", error);
           }
-        console.log("Submitted:", name, selectedImage);
+        console.log("Submitted:", name, image);
       };
     
   return (
@@ -42,9 +42,9 @@ const UserPanel = () => {
         onChange={handleImageUpload}
         className="mb-4"
         />
-      {selectedImage && (
+      {image && (
           <img
-          src={URL.createObjectURL(selectedImage)}
+          src={URL.createObjectURL(image)}
           alt="Selected Image"
           className="w-200 h-400 "
           />
